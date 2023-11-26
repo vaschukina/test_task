@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form method="post" action="post_site/">
+        {% csrf_token %}
+        <p><strong>Добавить сайт</strong></p>
+        <p><input maxlength="25" size="40" required name="path"></p>
+        <p>
+        <button type="submit">
+            <i></i>Отправить
+        </button>
+    </p>
+    </form>
+    <table>
+        <tr>
+            <th>path</th>
+            <th>ip</th>
+        </tr>
+        {% for item in objs %}
+        <tr>
+            <td>{{ item.path }}</td>
+            <td>{{ item.ip }}</td>
+            <td>
+                <form method="POST" action="delete_site/">
+                    {% csrf_token %}
+                    <input type="hidden" name="id" value={{ item.id }}/>
+                    <button type="submit">
+                        <i></i>Удалить
+                    </button>
+                </form>
+            </td>
+            <td>
+                <form method="POST" action="copy_ip/">
+                    {% csrf_token %}
+                    <input type="hidden" name="ip" value={{ item.ip }}/>
+                    <button type="submit">
+                        <i></i>Копировать
+                    </button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</body>
+</html>

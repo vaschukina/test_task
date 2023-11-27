@@ -141,10 +141,10 @@ TEMPLATES = [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'tt',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': '127.0.0.1',
+        'NAME': 'u1256183_for_interview_13',
+        'USER': 'u1256183_in13',
+        'PASSWORD': 'uU6mX3yT3ruN8gF0',
+        'HOST': '37.140.192.81',
         'PORT': '3306',
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"

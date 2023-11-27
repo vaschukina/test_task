@@ -33,18 +33,14 @@
                     </button>
                 </form>
             </td>
-            <td>
-                <form method="POST" action="copy_ip/">
-                    {% csrf_token %}
-                    <input type="hidden" name="ip" value={{ item.ip }}/>
-                    <button type="submit">
-                        <i></i>Копировать
-                    </button>
-                </form>
-            </td>
         </tr>
         {% endfor %}
     </table>
-
+    <form method="POST" action="copy_ip/">
+        {% csrf_token %}
+        <button type="submit">
+            <i></i>Копировать
+        </button>
+    </form>
 </body>
 </html>

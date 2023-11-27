@@ -15,6 +15,7 @@ def post_site(request):
     name = request.POST.get("path")
     proc = subprocess.run( ['nslookup', name], stdout=subprocess.PIPE, text = True )
     f = False
+    ip = ""
     for line in proc.stdout.splitlines():
         if f == True:
             if len(line)>0:
@@ -33,6 +34,6 @@ def delete_site(request):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def copy_ip(request):
-    ip = request.POST.get("ip")[:-1]
-    pyperclip.copy(ip)
+    objs=list(Site.objects.all().values_list('ip', flat=True))
+    pyperclip.copy(", ".join( objs ))
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

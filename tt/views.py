@@ -17,12 +17,14 @@ def post_site(request):
     f = False
     ip = ""
     for line in proc.stdout.splitlines():
-        if f == True:
-            if len(line)>0:
+        if len(line)>0:
+            if f == True:
                 ip += ", " + line.strip()
-        if line.find("Addresses:")>-1:
-            ip = line[10:].strip()
-            f = True
+            if line.find("Addresses:")>-1:
+                ip = line[10:].strip()
+                f = True
+            if f == False & line.find("Address:")>-1:
+                ip = line[8:].strip()
 
     S  = Site(path = name, ip = ip)
     S.save()
@@ -34,6 +36,6 @@ def delete_site(request):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def copy_ip(request):
-    objs=list(Site.objects.all().values_list('ip', flat=True))
-    pyperclip.copy(", ".join( objs ))
+    ips=list(Site.objects.all().values_list('ip', flat=True))
+    pyperclip.copy(", ".join( ips ))
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
